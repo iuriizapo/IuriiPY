@@ -6,7 +6,7 @@ for i in numbers:
     if i > 1:      # простое число - это натуральное число n > 1
         is_prime = True
         for j in range(2, i):
-            if i % j == 0 and i != j:    # and  для (2) тк простое число делется только на 1 и на само себя
+            if i % j == 0: 
                 not_primes.append(i)
                 is_prime = False
                 break
