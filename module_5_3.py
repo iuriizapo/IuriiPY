@@ -7,7 +7,12 @@ class House:
         return (f'Название: {self.name}, кол-во этажей: {self.number_of_floors}')
 
     def __eq__(self, other):
-        return self.number_of_floors == other.number_of_floors
+        if isinstance(other, House):
+            return self.number_of_floors == other.number_of_floors
+        elif isinstance(other, int):
+            return self.number_of_floors == other
+        else:
+            return 'Всё пропало!'
     def __ne__(self, other):
         return not (self == other)
 
@@ -22,8 +27,14 @@ class House:
         return not (self > other)
 
     def __add__(self, other):
-        self.number_of_floors = self.number_of_floors + other
-        return self
+        if isinstance(other, int):
+            self.number_of_floors = self.number_of_floors + other
+            return self
+        elif isinstance(other, House):
+            self.number_of_floors = self.number_of_floors + other.number_of_floors
+            return self
+        else:
+            return 'Всё пропало!'
     def __radd__(self, other):
         return self.__add__(other)
     def __iadd__(self, other):
