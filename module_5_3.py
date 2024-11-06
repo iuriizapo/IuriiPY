@@ -14,17 +14,27 @@ class House:
         else:
             return 'Всё пропало!'
     def __ne__(self, other):
-        return not (self == other)
+        return not self.__eq__(other)
 
     def __lt__(self, other):
-        return self.number_of_floors < other.number_of_floors
+        if isinstance(other, House):
+            return self.number_of_floors < other.number_of_floors
+        elif isinstance(other, int):
+            return self.number_of_floors < other
+        else:
+            return 'Всё пропало!'
     def __ge__(self, other):
-        return not (self < other)
+        return not self.__lt__(other)
 
     def __gt__(self, other):
-        return self.number_of_floors > other.number_of_floors
+        if isinstance(other, House):
+            return self.number_of_floors > other.number_of_floors
+        elif isinstance(other, int):
+            return self.number_of_floors > other
+        else:
+            return 'Всё пропало!'
     def __le__(self, other):
-        return not (self > other)
+        return not self.__gt__(other)
 
     def __add__(self, other):
         if isinstance(other, int):
