@@ -14,15 +14,15 @@ class Shop:
     __file_name = 'products.txt'
     def get_products(self):
         file = open('products.txt', 'r')
-        print(file.read())
+        sklad = file.read()
         file.close()
+        return sklad
 
     def add(self,*args):
-        file = open('products.txt', 'r+')
-        sklad = file.read()
+        file = open('products.txt', 'a')
         priv = list(args)
         for ar in priv:
-            if ar.name in sklad:
+            if ar.name in self.get_products():
                 print(f'Продукт {ar.name} уже есть в магазине')
             else:
                 file.write(f'{ar}\n')
