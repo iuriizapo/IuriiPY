@@ -15,15 +15,12 @@ class Bank:
 
         while count:
 
-            #if self.lock.locked() and self.balance >= 500:
-            #    self.lock.release()
-            #    sleep(0.001)
-            self.lock.acquire()
             count -= 1
             depo = randint(50,500)
+            if self.lock.locked() and self.balance >= 500:
+                self.lock.release()
             self.balance += depo
             print(f'Пополнение: {depo}. Баланс: {self.balance}')
-            self.lock.release()
             sleep(0.001)
 
 
@@ -33,19 +30,18 @@ class Bank:
         count = 100
 
         while count:
-            self.lock.acquire()
+
             count -= 1
             kred = randint(50,500)
             print(f'Запрос на {kred}')
             if kred <= self.balance:
                 self.balance -= kred
                 print(f'Снятие: {kred}. Баланс: {self.balance}')
-                self.lock.release()
                 sleep(0.001)
             else:
                 print(f'Запрос отклонён, недостаточно средств')
-                self.lock.release()
-                sleep(0.001)
+                self.lock.acquire()
+               
 
 
 bk = Bank()
