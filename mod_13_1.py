@@ -15,8 +15,7 @@ async def start_tournament():
     strongman_2 = asyncio.create_task(start_strongman('Denis', 4))
     strongman_3 = asyncio.create_task(start_strongman('Apollon', 5))
     await strongman_1
-    await strongman_2
-    await strongman_3
+    
 
 asyncio.run(start_tournament())
 
